@@ -1,6 +1,6 @@
 Package: miceExt
 Title: Extension Package to 'mice'
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: c( 
 	person("Tobias", "Schumacher", email = "tobias.schumacher1@rwth-aachen.de", role = c("aut", "cre")),
 	person("Philipp", "Gaffert", email = "philipp.gaffert@gfk.com", role = "aut"),
@@ -18,11 +18,13 @@ Author: Tobias Schumacher [aut, cre],
   Philipp Gaffert [aut],
   Stef van Buuren [ctb],
   Karin Groothuis-Oudshoorn [ctb]
+URL: http://github.com/tobiasschumacher/miceExt
+BugReports: http://github.com/tobiasschumacher/miceExt/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: testthat
 NeedsCompilation: no
-Packaged: 2018-02-08 18:49:16 UTC; tobi_
+Packaged: 2018-03-05 23:30:40 UTC; tobi_
 Repository: CRAN
-Date/Publication: 2018-02-09 11:12:24 UTC
+Date/Publication: 2018-03-05 23:46:37 UTC

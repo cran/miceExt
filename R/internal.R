@@ -18,7 +18,7 @@
 #    -> break iteration when 'to_visit' vector contains less than two elements
 #----------------------------------------------------------------------------------------------------------------------------------
 
-find_cols <- function(obj)
+find_blocks <- function(obj)
 {
   # determine set of candidate columns, taking visit sequence as well as imputation methods into account
   candidates <- intersect(which(obj$method %in% c("pmm","norm")), obj$visitSequence)
@@ -32,11 +32,11 @@ find_cols <- function(obj)
   target_matrix <- obj$where[,candidates]
 
   # initialize result list
-  cols <- vector(mode="list", length = n_length)
+  blocks <- vector(mode="list", length = n_length)
 
   # initialize helper variables for iteration
   to_visit <- 1:n_length
-  cols_index <- 1
+  blocks_index <- 1
 
   #iterate
   while (length(to_visit) > 1)
@@ -50,15 +50,15 @@ find_cols <- function(obj)
     equal_cols_ind <- unlist(lapply(to_visit, function(i) if(identical(fcol, target_matrix[,i])) i else 0))
 
     # append resulting index tuple to output list
-    cols[[cols_index]] <- candidates[equal_cols_ind]
-    cols_index <- cols_index + 1
+    blocks[[blocks_index]] <- candidates[equal_cols_ind]
+    blocks_index <- blocks_index + 1
 
     #delete indices of identical columns from 'to_visit' vector
     to_visit <- setdiff(to_visit,equal_cols_ind)
   }
 
   # filter resulting list by only returning tuples of length bigger than one
-  return(cols[lapply(cols,length) > 1])
+  return(blocks[lapply(blocks,length) > 1])
 }
 
 
@@ -135,8 +135,8 @@ inflate_vector <- function(vec, by)
 # call_remove_lin_dep
 # hack to access right frame from lower environment in buried function call
 #-------------------------------------------------------------------------------------------------------------------------------
-call_remove_lin_dep <- function(x, y, ry, eps, maxcor)
+call_remove_lin_dep <- function(x, y, ry, minvar, maxcor)
 {
-  keep <- remove.lindep(x, y, ry, eps = eps, maxcor = maxcor)
+  keep <- remove.lindep(x, y, ry, eps = minvar, maxcor = maxcor)
   return(keep)
 }
